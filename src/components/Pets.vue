@@ -2,7 +2,8 @@
   <div class="grid">
         <div  class="col-12 md:col-6 lg:col-3" v-for="pet in pets" :key="pet.id">
             <!-- <h3>{{ pet.name }}</h3> -->
-            <Pet :pet="pet" />
+            <Pet @Remove-pet="$emit('Remove-pet', pet.id)" @add-favorite="$emit('add-favorite', 
+            pet.id)" :pet="pet" />
         </div>
     </div>
 </template>
@@ -14,6 +15,7 @@ export default {
         pets: Array
     },
     components:{
+        $emits: ["Remove-pet", "add-favorite"],
         Pet
     }
 }
