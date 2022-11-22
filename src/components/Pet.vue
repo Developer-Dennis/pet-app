@@ -3,7 +3,9 @@
         <!-- <h3>{{ pet.name }}</h3> -->
         <Card >
             <template #header>
-                <img src="https://www.primefaces.org/wp-content/uploads/2020/02/primefacesorg-primevue-2020.png" />
+                <img 
+                :src="pet.url" alt="Pet"
+                />
             </template>
             <template #title>
                 {{ pet.name }}
@@ -16,9 +18,8 @@
                 quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
             </template> -->
             <template #footer>
-                <Button icon="pi pi-times" label="Remove" class="p-button-danger" style="margin-right: 4em" />
-                <Button icon="pi pi-heart" class="p-button-rounded p-button-danger" />
-                <Button icon="pi pi-heart" class="p-button-rounded p-button-danger p-button-outlined" />
+                <Button @click="onRemove(pet.id)" icon="pi pi-times" label="Remove" class="p-button-danger" style="margin-right: 4em" />
+                <Button @click="$emit('add-favorite', pet.id)" icon="pi pi-heart" :class="[pet.isFavorite ? '' : 'p-button-outlined', 'p-button-rounded p-button-danger']" />
             </template>
         </Card>
     </div>
@@ -28,6 +29,15 @@
 export default {
     props:{
         pet: Object
+    },
+    components:{
+
+    },
+    methods:{
+        onRemove(id){
+            // console.log("clicked", id)
+            this.$emit("Remove-pet", id)
+        }
     }
 }
 </script>
